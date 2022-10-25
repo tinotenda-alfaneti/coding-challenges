@@ -5,15 +5,11 @@ class Solution {
         StringBuilder strW2 = new StringBuilder();
         
         for (String s : word1) {
-            for(char c : s.toCharArray()) {
-                strW1.append(c);
-            }
+            strW1.append(s);
         }
         
         for (String s : word2) {
-            for(char c : s.toCharArray()) {
-                strW2.append(c);
-            }
+            strW2.append(s);
         }
         
         return strW1.toString().equals(strW2.toString());
