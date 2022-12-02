@@ -10,13 +10,20 @@ Order the elements according to the frequency -
 Return the last/first k elements in an array
 
 
+It turns out we have a better solution that can give us a runtime of 0(n), it is nothing other than the bucket sort
+
+So basically the algorithm works by storing the number of times each element occurs
+After doing that, we only need to return the first k non null values from the left
+
+Do you get it?
+
+
 */
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        
+        int len = nums.length;
         HashMap<Integer, Integer> freqMap = new HashMap<>();
-        ArrayList<Integer> freqArr = new ArrayList<>();
-        HashSet<Integer> kSet = new HashSet<>();
+        List<Integer>[] bucket = new List[len + 1];
         int[] result = new int[k];
         
         //Get frequencies
@@ -25,22 +32,23 @@ class Solution {
         }
         
         //Order elements according to frequency
-        for (Map.Entry<Integer, Integer> entry : freqMap.entrySet()) {
-            freqArr.add(entry.getValue());
+        for (Map.Entry<Integer, Integer> keyVal : freqMap.entrySet()) {
+            int index = keyVal.getValue();
+            if (bucket[index] == null) {
+                bucket[index] = new ArrayList<>();
+            }
+            bucket[index].add(keyVal.getKey());
         }
         
-        Collections.sort(freqArr);
-        int index = freqArr.size() - 1;
-        for (int i = index; k > 0; i--) {
-            kSet.add(freqArr.get(i));
-            k--;
-        }
         
         // Get the k most frequent elements
-        for (Map.Entry<Integer, Integer> entry : freqMap.entrySet()) {
-            if (kSet.contains(entry.getValue())) {
-                result[k] = entry.getKey();
-                k++;
+        for (int i = len; i >= 0 && k > 0; i--) {
+            if (bucket[i] != null) {
+                for(int num : bucket[i]) {
+                    result[k-1] = num;
+                    k--;
+                }
+                
             }
         }
         
