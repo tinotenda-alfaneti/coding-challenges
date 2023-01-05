@@ -11,9 +11,13 @@ This REPO contains the questions, descriptions, pseudocode, solutions of the pro
 
 ## PURPOSE
 Hone my problem-solving skills
+
 Practice Test Driven Development approach
+
 Prepare for technical interview
+
 Help myself keep track of my progress and stay consistent
+
 I am a fan of GitHub
 
 
