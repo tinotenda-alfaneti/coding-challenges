@@ -4,18 +4,24 @@ class Solution {
         
         int n = nums.length;
         
+        k = k%n;
+        
         if (k == n) return;
         
-        int[] rotatedNums = new int[n];
+        reverseArr(nums, 0, n-1);
+        reverseArr(nums, 0, k-1);
+        reverseArr(nums, k, n-1);
+          
+    }
+    
+    public void reverseArr(int[] numsArr, int start, int end) {
         
-        for (int i = 0; i < n; i++) {
-            rotatedNums[i] = nums[i];
-        }
-        
-        
-        for (int i = 0; i < n; i++) {
-            int index = (i + k)%n;
-            nums[index] = rotatedNums[i]; 
+        while(start < end) {
+            int removed = numsArr[start];
+            numsArr[start] = numsArr[end];
+            numsArr[end] = removed;
+            end--;
+            start++;
         }
         
     }
